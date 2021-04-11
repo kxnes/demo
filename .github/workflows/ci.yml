@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  lint-style:
+    name: lint
+    runs-on: ubuntu-20.04
+    container: python:3.9.2-buster
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          pip install isort black flake8 pycodestyle
+      - name: Run linters
+        run: |
+          isort --check .
+          black --check .
+          flake8 .
+          pycodestyle .
+
+  lint-types:
+    name: types
+    runs-on: ubuntu-20.04
+    container: python:3.9.2-buster
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          pip install mypy
+      - name: Run type checkers
+        run: |
+          mypy .
+
+  test:
+    name: test
+    runs-on: ubuntu-20.04
+    container: python:3.9.2-buster
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry config virtualenvs.create false
+          poetry install --no-root
+      - name: Run tests
+        run: |
+          pytest --cov .
