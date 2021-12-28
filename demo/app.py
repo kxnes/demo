@@ -1,11 +1,12 @@
+"""Main application."""
 import enum
 
 
-class Animal(str, enum.Enum):
-    """ Registered animal types. """
+class Animal(enum.Enum):
+    """Registered animal types."""
 
-    dog = "bark"
-    cat = "meow"
+    dog = 'bark'
+    cat = 'meow'
 
 
 def sound(animal: Animal) -> str:

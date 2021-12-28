@@ -9,8 +9,9 @@ Development
 Install dependencies.
 
 ```shell
-pip install -U pip poetry
-poetry install
+pip install -U pip setuptools poetry
+# recommended version: 1.1.12
+poetry install --no-root
 ```
 
 Setup `pre-commit` hook.
@@ -26,8 +27,8 @@ Use registered linters like:
 
 - `isort`
 - `black`
-- `flake8`
-- `pycodestyle`
+- `flake8` (wemake-python-styleguide)
+- `pyright`
 - `mypy`
 
 Testing
@@ -38,9 +39,3 @@ Run all tests:
 ```shell
 pytest --cov .
 ```
-
-CI
---
-
-- [GitHub Actions](.github/workflows/ci.yml)
-- [GitLab CI/CD](.gitlab-ci.yml)

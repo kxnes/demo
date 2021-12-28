@@ -1,13 +1,13 @@
 from demo import app
 
 
-class TestSound:
-    def test_dog(self):
+class TestSound(object):
+    def test_dog(self) -> None:
         got = app.sound(app.Animal.dog)
-        want = "bark"
+        want = 'bark'
         assert got == want
 
-    def test_cat(self):
+    def test_cat(self) -> None:
         got = app.sound(app.Animal.cat)
-        want = "meow"
+        want = 'meow'
         assert got == want
